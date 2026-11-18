@@ -1,0 +1,75 @@
+# Copyright, licenses, and upstream sources
+
+Simply Static Studio Backup and Migrate is distributed under the GNU General
+Public License, version 3 or (at your option) any later version. The full license
+is included in `LICENSE`. This license applies to the combined plugin, including
+its original PHP, admin source, styles, translations, and Simply Static logo.
+Upstream copyright and license notices remain applicable to their respective
+components.
+
+## ServMask / All-in-One WP Migration
+
+Files: `src/ThirdParty/servmask/`.
+
+Copyright (C) 2014-2025 ServMask Inc. Licensed under GPL-3.0-or-later.
+
+Upstream sources:
+
+* https://wordpress.org/plugins/all-in-one-wp-migration/
+* https://plugins.svn.wordpress.org/all-in-one-wp-migration/trunk/
+
+The backup, database, iterator, filter, and exception code is adapted from
+All-in-One WP Migration. Simply Static modified these files during 2025-2026,
+including namespace isolation, Studio-compatible ZIP export, WordPress queue
+integration, database streaming, storage handling, and security/reliability
+changes. These files are maintained as a modified fork; they are not an
+unmodified copy of the current upstream release. Existing ServMask copyright
+and attribution notices are preserved in the source. `LICENSE` supplies the
+GPLv3 terms used by this component.
+
+## PclZip
+
+File: `src/class-pclzip-archive.php`.
+
+The instance-scoped append and compression routines are adapted from PclZip
+2.8.2 by Vincent Blavet, distributed under the GNU LGPL. The plugin extends
+WordPress's installed PclZip library and does not bundle a separate full copy.
+Simply Static modified these routines in 2026 to use private scratch files
+without changing PclZip's global temporary-directory configuration.
+
+Upstream source and copyright/license notice:
+
+* https://github.com/WordPress/WordPress/blob/master/wp-admin/includes/class-pclzip.php
+
+## WP Background Processing
+
+Files: `src/Queue/class-async-request.php` and
+`src/Queue/class-background-process.php`.
+
+Authors: Delicious Brains Inc. and contributors.
+Upstream license: GPL-2.0-or-later; distributed in this combined plugin under
+GPL-3.0-or-later, using the upstream permission to choose a later GPL version.
+
+Upstream source and license declaration:
+
+* https://github.com/deliciousbrains/wp-background-processing
+* https://github.com/deliciousbrains/wp-background-processing/blob/master/composer.json
+
+Simply Static modified these files during 2025-2026 to use its namespace and
+backup tasks, authenticate workers, isolate multisite queues, and implement
+durable locking, cancellation, recovery, and browser-assisted processing.
+
+## WordPress and React runtime libraries
+
+The admin interface imports WordPress packages and React through the script
+dependencies declared in `src/Admin/build/index.asset.php`. WordPress supplies
+these libraries; the plugin does not bundle copies of them.
+
+* WordPress/Gutenberg packages: WordPress contributors, GPL-2.0-or-later.
+  https://github.com/WordPress/gutenberg
+* React: Meta Platforms, Inc. and affiliates, MIT.
+  https://github.com/facebook/react
+
+The Node.js packages listed in `src/Admin/package-lock.json` are build and test
+dependencies. Their distributions and license files are installed by `npm ci`;
+`node_modules` is not part of the plugin ZIP.

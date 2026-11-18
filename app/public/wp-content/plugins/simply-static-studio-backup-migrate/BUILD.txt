@@ -1,0 +1,63 @@
+# Building the admin assets
+
+The distributed plugin includes its readable admin source in `src/Admin/src/`
+and the exact dependency versions in `src/Admin/package-lock.json`. PHP source
+runs directly and needs no compilation or production Composer dependencies.
+
+Use Node.js 20.19+, 22.13+, or 24.x (as constrained in `package.json`) with npm.
+From the plugin directory:
+
+```sh
+cd src/Admin
+npm ci --no-audit
+npm run build
+```
+
+`@wordpress/scripts` compiles `src/index.js` and the imported SCSS into:
+
+* `build/index.js`
+* `build/index.css`
+* `build/index-rtl.css`
+* `build/index.asset.php`
+
+The PHP asset file lists the script dependencies and the build version used by
+WordPress. React and the WordPress packages are loaded from WordPress itself
+instead of shipping separate copies of those runtime libraries.
+
+The ZIP already contains the compiled assets, so installing the plugin does not
+require Node.js, npm, a JavaScript build, or Composer. `node_modules`, development
+test files, and dependency caches are intentionally excluded from distribution.
+Do not upload them to WordPress.org.
+
+The repository includes the full test suite and deterministic ZIP scripts.
+From a repository checkout, use:
+
+```sh
+composer install
+composer lint:php
+composer test
+cd src/Admin
+npm ci --no-audit
+npm run lint:js
+npm test
+npm run build
+cd ../..
+composer release:build
+composer release:check
+```
+
+The release build is written under `.context/releases/`. The independent release
+checker verifies the manifest, plugin/readme metadata, compiled asset dependency
+declarations, required source files, and the absence of development artifacts.
+It also rejects direct cURL/socket clients and literal remote URLs passed to PHP
+file helpers, catching these bypasses before packaging.
+
+The PHP coding-standards gate covers WordPress APIs, security, database access,
+and internationalization for all shipped PHP. A full WordPress formatting and
+PHPDoc audit is separate from this API/security gate.
+
+See `LICENSE` and `THIRD-PARTY-NOTICES.txt` for licensing and upstream sources.
+
+Translations are delivered through translate.wordpress.org and WordPress language
+packs. The repository keeps the German catalogs for translation work, but the
+release ZIP includes only the POT source template from `languages/`.
