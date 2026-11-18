@@ -20,9 +20,6 @@ use Elementor\Modules\Components\PropTypes\Overridable_Prop_Type;
 use ElementorPro\Modules\Attributes\Controls\Repeatable_Attributes_Control;
 use Elementor\Modules\AtomicWidgets\PropTypes\Key_Value_Prop_Type;
 use ElementorPro\Modules\AtomicForm\Default_Id_Provider;
-use ElementorPro\Modules\AtomicForm\Has_Default_Field_Id;
-use ElementorPro\Modules\AtomicForm\Webmcp_Field_Props;
-use ElementorPro\Modules\AtomicWidgets\Traits\Has_Webmcp_Field_Exposure;
 use ElementorPro\Modules\AtomicForm\Default_Value_Provider;
 use ElementorPro\Modules\AtomicForm\Select\Controls\Options_Select_Control;
 use Elementor\Modules\AtomicWidgets\PropTypes\Options_Prop_Type;
@@ -32,7 +29,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Select extends Atomic_Widget_Base {
 	use Has_Template;
-	use Has_Default_Field_Id;
 
 	public static function get_computed_html_tag( array $settings ): string {
 		return 'select';
@@ -61,7 +57,7 @@ class Select extends Atomic_Widget_Base {
 	}
 
 	protected static function define_props_schema(): array {
-		return array_merge( [
+		return [
 			'classes' => Classes_Prop_Type::make()
 				->default( [] ),
 			'name' => String_Prop_Type::make()
@@ -83,7 +79,7 @@ class Select extends Atomic_Widget_Base {
 				->set_dependencies( Default_Value_Provider::get_dependencies() ),
 			'attributes' => Attributes_Prop_Type::make()->meta( Overridable_Prop_Type::ignore() ),
 			'_cssid' => Default_Id_Provider::get_default_id_prop( self::get_element_type() ),
-		], Webmcp_Field_Props::get_props() );
+		];
 	}
 
 	private function define_options_control() {
@@ -123,7 +119,6 @@ class Select extends Atomic_Widget_Base {
 				->set_label( __( 'Settings', 'elementor-pro' ) )
 				->set_id( 'settings' )
 				->set_items( $this->get_settings_controls() ),
-			...Webmcp_Field_Props::get_controls(),
 		];
 	}
 

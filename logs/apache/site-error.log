@@ -1,2 +1,34 @@
 [Wed Nov 18 20:59:21.542862 2026] [fcgid:warn] [pid 5160:tid 1460] [client 127.0.0.1:56278] mod_fcgid: read timeout from pipe, referer: http://www.pcpulses.com/wp-admin/admin.php?page=simply-static-settings
 [Wed Nov 18 20:59:21.542862 2026] [core:error] [pid 5160:tid 1460] [client 127.0.0.1:56278] End of script output before headers: index.php, referer: http://www.pcpulses.com/wp-admin/admin.php?page=simply-static-settings
+[Wed Nov 18 21:16:28.837244 2026] [fcgid:warn] [pid 21376:tid 1456] [client 127.0.0.1:59864] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:16:28.838243 2026] [core:error] [pid 21376:tid 1456] [client 127.0.0.1:59864] End of script output before headers: wp-cron.php
+[Wed Nov 18 21:17:53.487451 2026] [fcgid:warn] [pid 21376:tid 1452] [client 127.0.0.1:56573] mod_fcgid: read timeout from pipe, referer: http://www.pcpulses.com/wp-admin/admin.php?page=simply-static-settings
+[Wed Nov 18 21:17:53.523450 2026] [core:error] [pid 21376:tid 1452] [client 127.0.0.1:56573] End of script output before headers: index.php, referer: http://www.pcpulses.com/wp-admin/admin.php?page=simply-static-settings
+[Wed Nov 18 21:19:10.664044 2026] [fcgid:warn] [pid 21376:tid 1456] [client 127.0.0.1:50267] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:19:10.664044 2026] [core:error] [pid 21376:tid 1456] [client 127.0.0.1:50267] End of script output before headers: wp-cron.php
+[Wed Nov 18 21:21:25.930388 2026] [fcgid:warn] [pid 21376:tid 1404] [client 127.0.0.1:65222] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:21:25.930388 2026] [core:error] [pid 21376:tid 1404] [client 127.0.0.1:65222] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:22:30.865256 2026] [fcgid:warn] [pid 21376:tid 1436] [client 127.0.0.1:63365] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:22:30.865256 2026] [core:error] [pid 21376:tid 1436] [client 127.0.0.1:63365] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:23:39.536084 2026] [fcgid:warn] [pid 21376:tid 1460] [client 127.0.0.1:56413] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:23:39.536084 2026] [core:error] [pid 21376:tid 1460] [client 127.0.0.1:56413] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:24:45.155868 2026] [fcgid:warn] [pid 21376:tid 1404] [client 127.0.0.1:56950] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:24:45.155868 2026] [core:error] [pid 21376:tid 1404] [client 127.0.0.1:56950] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:25:50.388994 2026] [fcgid:warn] [pid 21376:tid 1428] [client 127.0.0.1:61536] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:25:50.388994 2026] [core:error] [pid 21376:tid 1428] [client 127.0.0.1:61536] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:27:08.840317 2026] [fcgid:warn] [pid 21376:tid 1460] [client 127.0.0.1:64279] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:27:08.840317 2026] [core:error] [pid 21376:tid 1460] [client 127.0.0.1:64279] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:31:02.115121 2026] [fcgid:warn] [pid 21376:tid 1376] [client 127.0.0.1:63440] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:31:02.115121 2026] [core:error] [pid 21376:tid 1376] [client 127.0.0.1:63440] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:32:06.071485 2026] [fcgid:warn] [pid 21376:tid 1460] [client 127.0.0.1:61833] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:32:06.071485 2026] [core:error] [pid 21376:tid 1460] [client 127.0.0.1:61833] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:33:10.829101 2026] [fcgid:warn] [pid 21376:tid 1456] [client 127.0.0.1:62237] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:33:10.829101 2026] [core:error] [pid 21376:tid 1456] [client 127.0.0.1:62237] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:34:16.644535 2026] [fcgid:warn] [pid 21376:tid 1436] [client 127.0.0.1:59273] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:34:16.644535 2026] [core:error] [pid 21376:tid 1436] [client 127.0.0.1:59273] End of script output before headers: admin-ajax.php
+[Wed Nov 18 21:34:23.491170 2026] [fcgid:warn] [pid 21376:tid 1428] (OS 109)The pipe has been ended.  : [client 127.0.0.1:56399] mod_fcgid: get overlap result error
+[Wed Nov 18 21:34:23.514708 2026] [core:error] [pid 21376:tid 1428] [client 127.0.0.1:56399] End of script output before headers: wp-cron.php
+[Wed Nov 18 21:34:23.575707 2026] [fcgid:warn] [pid 21376:tid 1456] (OS 109)The pipe has been ended.  : [client 127.0.0.1:56400] mod_fcgid: get overlap result error
+[Wed Nov 18 21:34:23.575707 2026] [core:error] [pid 21376:tid 1456] [client 127.0.0.1:56400] End of script output before headers: wp-cron.php
+[Wed Nov 18 21:44:45.561624 2026] [fcgid:warn] [pid 1200:tid 1460] [client 127.0.0.1:55665] mod_fcgid: read timeout from pipe
+[Wed Nov 18 21:44:45.587748 2026] [core:error] [pid 1200:tid 1460] [client 127.0.0.1:55665] End of script output before headers: admin-ajax.php

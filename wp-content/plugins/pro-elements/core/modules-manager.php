@@ -16,7 +16,6 @@ final class Modules_Manager {
 
 	public function __construct() {
 		$modules = [
-			'admin-notices',
 			'query-control',
 			'custom-attributes',
 			'custom-css',
@@ -40,7 +39,6 @@ final class Modules_Manager {
 			'attributes',
 			'atomic-widgets',
 			'atomic-form',
-			'atomic-carousel',
 			'collection-loop',
 			'display-conditions',
 			'transitions',
@@ -85,7 +83,6 @@ final class Modules_Manager {
 			'search',
 			'cloud-library',
 			'variables',
-			'atomic-custom-icons',
 			'editor-one',
 			'interactions',
 			'mcp',

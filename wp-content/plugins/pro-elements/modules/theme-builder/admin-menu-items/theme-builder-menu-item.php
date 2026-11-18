@@ -9,16 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Theme_Builder_Menu_Item implements Admin_Menu_Item {
-	/**
-	 * Capability required for Theme Builder admin access.
-	 * Static so MCP and other call sites can check without instantiating.
-	 */
-	public static function get_user_capability(): string {
-		return 'publish_posts';
-	}
-
 	public function get_capability(): string {
-		return self::get_user_capability();
+		return 'publish_posts';
 	}
 
 	public function get_label(): string {

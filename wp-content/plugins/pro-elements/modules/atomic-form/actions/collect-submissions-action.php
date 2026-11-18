@@ -137,7 +137,8 @@ class Collect_Submissions_Action extends Action_Base {
 		if ( $from_post ) {
 			$url = esc_url_raw( $from_post );
 		} else {
-			$url = isset( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
+			$referer = ElementorUtils::get_super_global_value( $_SERVER, 'HTTP_REFERER' );
+			$url = $referer ? esc_url_raw( wp_unslash( $referer ) ) : '';
 		}
 
 		if ( ! $url ) {

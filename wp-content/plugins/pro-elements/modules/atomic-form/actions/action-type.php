@@ -9,9 +9,6 @@ class Action_Type {
 	const EMAIL = 'email';
 	const COLLECT_SUBMISSIONS = 'collect-submissions';
 	const WEBHOOK = 'webhook';
-	const REDIRECT = 'redirect';
-	const POPUP = 'popup';
-	const MAILCHIMP = 'mailchimp';
 
 	/**
 	 * Get all registered action types.
@@ -23,9 +20,6 @@ class Action_Type {
 			self::EMAIL,
 			self::COLLECT_SUBMISSIONS,
 			self::WEBHOOK,
-			self::REDIRECT,
-			self::POPUP,
-			self::MAILCHIMP,
 		];
 	}
 

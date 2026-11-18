@@ -2,8 +2,6 @@
 
 namespace ElementorPro\Modules\CollectionLoop\Query\Taxonomy;
 
-use ElementorPro\Modules\CollectionLoop\Compat\Legacy_Avoid_List_Bridge;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -29,8 +27,6 @@ final class Taxonomy_Avoid_List {
 	 * @param int[] $term_ids
 	 */
 	public static function add( array $term_ids ): void {
-		$added = [];
-
 		foreach ( $term_ids as $term_id ) {
 			$id = (int) $term_id;
 
@@ -38,23 +34,15 @@ final class Taxonomy_Avoid_List {
 				continue;
 			}
 
-			$added[] = $id;
+			self::$term_ids[] = $id;
 		}
-
-		if ( empty( $added ) ) {
-			return;
-		}
-
-		self::$term_ids = array_merge( self::$term_ids, $added );
-
-		Legacy_Avoid_List_Bridge::forward_terms( $added );
 	}
 
 	/**
 	 * @return int[]
 	 */
 	public static function get(): array {
-		return array_values( array_unique( array_merge( self::$term_ids, Legacy_Avoid_List_Bridge::legacy_term_ids() ) ) );
+		return array_values( array_unique( self::$term_ids ) );
 	}
 
 	/**
@@ -62,7 +50,5 @@ final class Taxonomy_Avoid_List {
 	 */
 	public static function reset(): void {
 		self::$term_ids = [];
-
-		Legacy_Avoid_List_Bridge::reset_terms();
 	}
 }

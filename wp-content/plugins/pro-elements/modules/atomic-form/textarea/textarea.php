@@ -21,9 +21,6 @@ use Elementor\Modules\AtomicWidgets\PropTypes\Color_Prop_Type;
 use Elementor\Modules\AtomicWidgets\Styles\Style_States;
 use Elementor\Modules\Components\PropTypes\Overridable_Prop_Type;
 use ElementorPro\Modules\AtomicForm\Default_Id_Provider;
-use ElementorPro\Modules\AtomicForm\Has_Default_Field_Id;
-use ElementorPro\Modules\AtomicForm\Webmcp_Field_Props;
-use ElementorPro\Modules\AtomicWidgets\Traits\Has_Webmcp_Field_Exposure;
 use ElementorPro\Modules\AtomicForm\Default_Value_Provider;
 use ElementorPro\Modules\AtomicForm\Textarea\Controls\Number_Range_Control;
 if ( ! defined( 'ABSPATH' ) ) {
@@ -32,7 +29,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Textarea extends Atomic_Widget_Base {
 	use Has_Template;
-	use Has_Default_Field_Id;
 
 	public static function get_computed_html_tag( array $settings ): string {
 		return 'textarea';
@@ -85,7 +81,7 @@ class Textarea extends Atomic_Widget_Base {
 			'resizable' => Boolean_Prop_Type::make()
 				->default( true ),
 			'attributes' => Attributes_Prop_Type::make()->meta( Overridable_Prop_Type::ignore() ),
-			'_cssid' => Default_Id_Provider::get_default_id_prop( self::get_element_type() )->meta( 'llm_configurable', true )->description( 'ID of the text area, should be unique and describe what the field collects (e.g. message).' ),
+			'_cssid' => Default_Id_Provider::get_default_id_prop( self::get_element_type() ),
 		];
 
 		if ( self::supports_number_range_length() ) {
@@ -95,7 +91,7 @@ class Textarea extends Atomic_Widget_Base {
 			$schema['maxlength'] = Number_Prop_Type::make();
 		}
 
-		return array_merge( $schema, Webmcp_Field_Props::get_props() );
+		return $schema;
 	}
 
 	protected function define_atomic_controls(): array {
@@ -146,7 +142,6 @@ class Textarea extends Atomic_Widget_Base {
 				->set_label( __( 'Settings', 'elementor-pro' ) )
 				->set_id( 'settings' )
 				->set_items( $this->get_settings_controls() ),
-			...Webmcp_Field_Props::get_controls(),
 		];
 	}
 

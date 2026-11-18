@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import {
 	Alert,
 	Box,
@@ -28,8 +28,6 @@ const SubSettingRow = ( {
 	showOverrideOption = false,
 	notExported = false,
 } ) => {
-	const switchId = useId();
-
 	if ( notExported ) {
 		return (
 			<Box
@@ -60,7 +58,7 @@ const SubSettingRow = ( {
 			} }
 		>
 			<Stack direction="row" alignItems="center" spacing={ 1 } sx={ { flex: 1 } }>
-				<Typography variant="body1" color="text.primary" component="label" htmlFor={ switchId }>
+				<Typography variant="body1" color="text.primary">
 					{ label }
 				</Typography>
 
@@ -148,7 +146,6 @@ const SubSettingRow = ( {
 					color="info"
 					size="medium"
 					disabled={ disabled || ( limitExceeded && ! overrideAll ) }
-					inputProps={ { id: switchId } }
 				/>
 			</Stack>
 		</Box>
@@ -174,7 +171,6 @@ export function ClassesVariablesSection( {
 	onSettingChange,
 	isImport = false,
 	classesExported = true,
-	defaultStylesExported = true,
 	variablesExported = true,
 	classesLimitExceeded = false,
 	variablesLimitExceeded = false,
@@ -190,7 +186,6 @@ export function ClassesVariablesSection( {
 
 	const hasLimitWarning = isImport && ( classesLimitExceeded || variablesLimitExceeded );
 	const classesNotExported = isImport && ! classesExported;
-	const defaultStylesNotExported = isImport && ! defaultStylesExported;
 	const variablesNotExported = isImport && ! variablesExported;
 
 	return (
@@ -198,7 +193,7 @@ export function ClassesVariablesSection( {
 			<Stack spacing={ 2.5 }>
 				<Box sx={ { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } }>
 					<Typography variant="h6">
-						{ __( 'Classes, variables & default styles', 'elementor' ) }
+						{ __( 'Classes & variables', 'elementor' ) }
 					</Typography>
 				</Box>
 
@@ -264,14 +259,6 @@ export function ClassesVariablesSection( {
 						showOverrideOption={ isImport && ! variablesNotExported }
 						notExported={ variablesNotExported }
 					/>
-
-					<SubSettingRow
-						label={ __( 'Default Styles', 'elementor' ) }
-						checked={ settings.defaultStyles ?? false }
-						onChange={ ( isChecked ) => onSettingChange( 'defaultStyles', isChecked ) }
-						disabled={ disabled }
-						notExported={ defaultStylesNotExported }
-					/>
 				</Stack>
 			</Stack>
 		</Box>
@@ -281,7 +268,6 @@ export function ClassesVariablesSection( {
 ClassesVariablesSection.propTypes = {
 	settings: PropTypes.shape( {
 		classes: PropTypes.bool,
-		defaultStyles: PropTypes.bool,
 		variables: PropTypes.bool,
 		classesOverrideAll: PropTypes.bool,
 		variablesOverrideAll: PropTypes.bool,
@@ -289,7 +275,6 @@ ClassesVariablesSection.propTypes = {
 	onSettingChange: PropTypes.func.isRequired,
 	isImport: PropTypes.bool,
 	classesExported: PropTypes.bool,
-	defaultStylesExported: PropTypes.bool,
 	variablesExported: PropTypes.bool,
 	classesLimitExceeded: PropTypes.bool,
 	variablesLimitExceeded: PropTypes.bool,

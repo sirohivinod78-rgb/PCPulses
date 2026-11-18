@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { useCustomPostTypes } from './use-custom-post-types';
-import { getManifestItem } from '../utils';
 
 export function useKitCustomizationCustomPostTypes( { data } ) {
 	const isImport = data?.hasOwnProperty( 'uploadedData' );
@@ -12,7 +11,7 @@ export function useKitCustomizationCustomPostTypes( { data } ) {
 			return builtInCustomPostTypes;
 		}
 
-		const customPostTypesTitles = Object.values( getManifestItem( data, 'custom-post-type-title' ) || {} ).map( ( postType ) => {
+		const customPostTypesTitles = Object.values( data?.uploadedData?.manifest?.[ 'custom-post-type-title' ] || {} ).map( ( postType ) => {
 			return {
 				value: postType.name,
 				label: postType.label,
@@ -26,8 +25,8 @@ export function useKitCustomizationCustomPostTypes( { data } ) {
 			} );
 		}
 
-		const wpContent = getManifestItem( data, 'wp-content' ) || {};
-		const content = getManifestItem( data, 'content' ) || {};
+		const wpContent = data?.uploadedData?.manifest?.[ 'wp-content' ] || {};
+		const content = data?.uploadedData?.manifest?.content || {};
 
 		return customPostTypesTitles.filter( ( postType ) => {
 			const postTypeValue = postType.value;
@@ -40,7 +39,7 @@ export function useKitCustomizationCustomPostTypes( { data } ) {
 
 			return isInWpContent || isInElementorContent;
 		} );
-	}, [ isImport, data, builtInCustomPostTypes ] );
+	}, [ isImport, data?.uploadedData, builtInCustomPostTypes ] );
 
 	return {
 		customPostTypes,

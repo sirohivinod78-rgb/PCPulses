@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { useTaxonomies } from './use-taxonomies';
-import { getManifestItem } from '../utils';
 
 export function useKitCustomizationTaxonomies( { data, open } ) {
 	const isImport = data?.hasOwnProperty( 'uploadedData' );
@@ -16,7 +15,7 @@ export function useKitCustomizationTaxonomies( { data, open } ) {
 
 		const taxonomiesMap = {};
 
-		Object.values( getManifestItem( data, 'taxonomies' ) || {} ).forEach( ( taxonomiesListForPostType ) => {
+		Object.values( data?.uploadedData?.manifest?.taxonomies || {} ).forEach( ( taxonomiesListForPostType ) => {
 			taxonomiesListForPostType.forEach( ( taxonomy ) => {
 				const taxonomyObj = 'string' === typeof taxonomy
 					// BC For Old Export

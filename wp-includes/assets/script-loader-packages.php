@@ -156,13 +156,13 @@
 		'dependencies' => array(
 			
 		),
-		'version' => 'fc209395a022242d64aa'
+		'version' => '4c6f3dd40077f7c17604'
 	),
 	'block-serialization-spec-parser.js' => array(
 		'dependencies' => array(
 			
 		),
-		'version' => '345804e2c9fb36e816cd'
+		'version' => '7b0b496c3d48b1ef3f9e'
 	),
 	'blocks.js' => array(
 		'dependencies' => array(

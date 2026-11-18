@@ -4,7 +4,6 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from 'react';
 import * as PropTypes from 'prop-types';
 import { UpgradeTooltip } from './upgrade-tooltip';
-import { getManifestItem } from '../utils';
 
 export function ThemeBuilderCustomization( { state, settingKey, onStateChange, data, disabled, tooltip = false } ) {
 	const isImport = data.hasOwnProperty( 'uploadedData' );
@@ -27,7 +26,7 @@ export function ThemeBuilderCustomization( { state, settingKey, onStateChange, d
 			const actualConflicts = data?.uploadedData?.conflicts ? Object.entries( data.uploadedData.conflicts ) : [];
 
 			const formattedConflicts = actualConflicts.map( ( [ importedTemplateId, conflictsList ] ) => {
-				const importedTemplate = getManifestItem( data, 'templates' )?.[ importedTemplateId ];
+				const importedTemplate = data?.uploadedData?.manifest?.templates?.[ importedTemplateId ];
 				const firstConflict = conflictsList[ 0 ];
 
 				return {
@@ -61,7 +60,7 @@ export function ThemeBuilderCustomization( { state, settingKey, onStateChange, d
 	};
 
 	const getTemplateTypeLabel = ( templateId ) => {
-		const template = getManifestItem( data, 'templates' )?.[ templateId ];
+		const template = data?.uploadedData?.manifest?.templates?.[ templateId ];
 		if ( ! template ) {
 			return 'Unknown Template';
 		}
