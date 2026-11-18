@@ -15,3 +15,11 @@ AH00558: httpd.exe: Could not reliably determine the server's fully qualified do
 AH00558: httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.29.210. Set the 'ServerName' directive globally to suppress this message
 AH00558: httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.29.210. Set the 'ServerName' directive globally to suppress this message
 [Fri Nov 13 21:09:44.238643 2026] [mpm_winnt:notice] [pid 16432:tid 848] AH00354: Child: Starting 64 worker threads.
+AH00558: httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.29.210. Set the 'ServerName' directive globally to suppress this message
+[Wed Nov 18 20:54:39.673228 2026] [mpm_winnt:notice] [pid 12892:tid 892] AH00455: Apache/2.4.43 (Win32) mod_fcgid/2.3.9a configured -- resuming normal operations
+[Wed Nov 18 20:54:39.678230 2026] [mpm_winnt:notice] [pid 12892:tid 892] AH00456: Server built: Apr 21 2020 13:46:54
+[Wed Nov 18 20:54:39.678230 2026] [core:notice] [pid 12892:tid 892] AH00094: Command line: 'C:\\Users\\Vinod Kumar\\AppData\\Roaming\\Local\\lightning-services\\apache-2.4.43+11\\bin\\win32\\bin\\httpd.exe -d C:/Users/Vinod Kumar/AppData/Roaming/Local/lightning-services/apache-2.4.43+11/bin/win32 -D FOREGROUND -f C:\\Users\\Vinod Kumar\\AppData\\Roaming\\Local\\run\\oobDcY0Cx\\conf\\apache\\apache2.conf'
+[Wed Nov 18 20:54:39.686228 2026] [mpm_winnt:notice] [pid 12892:tid 892] AH00418: Parent: Created child process 5160
+AH00558: httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.29.210. Set the 'ServerName' directive globally to suppress this message
+AH00558: httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.29.210. Set the 'ServerName' directive globally to suppress this message
+[Wed Nov 18 20:54:42.678996 2026] [mpm_winnt:notice] [pid 5160:tid 928] AH00354: Child: Starting 64 worker threads.

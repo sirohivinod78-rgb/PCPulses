@@ -1,0 +1,2 @@
+[Wed Nov 18 20:59:21.542862 2026] [fcgid:warn] [pid 5160:tid 1460] [client 127.0.0.1:56278] mod_fcgid: read timeout from pipe, referer: http://www.pcpulses.com/wp-admin/admin.php?page=simply-static-settings
+[Wed Nov 18 20:59:21.542862 2026] [core:error] [pid 5160:tid 1460] [client 127.0.0.1:56278] End of script output before headers: index.php, referer: http://www.pcpulses.com/wp-admin/admin.php?page=simply-static-settings
