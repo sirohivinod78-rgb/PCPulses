@@ -1,0 +1,31 @@
+{
+	"name": "simply-static-studio-export",
+	"version": "1.0.0",
+	"private": true,
+	"description": "",
+	"main": "build/index.js",
+	"engines": {
+		"node": "^20.19.0 || ^22.13.0 || ^24.0.0"
+	},
+	"scripts": {
+		"build": "wp-scripts build",
+		"lint:js": "wp-scripts lint-js src",
+		"start": "wp-scripts start",
+		"test": "wp-scripts test-unit-js --runInBand",
+		"test:coverage": "wp-scripts test-unit-js --coverage --runInBand",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"author": "",
+	"license": "GPL-3.0-or-later",
+	"devDependencies": {
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.2",
+		"@wordpress/api-fetch": "^7.50.0",
+		"@wordpress/components": "^36.1.0",
+		"@wordpress/data": "^10.50.0",
+		"@wordpress/element": "^8.2.0",
+		"@wordpress/i18n": "^6.23.0",
+		"@wordpress/scripts": "^32.6.0",
+		"typescript": "6.0.3"
+	}
+}

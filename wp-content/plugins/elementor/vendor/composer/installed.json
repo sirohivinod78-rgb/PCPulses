@@ -295,7 +295,7 @@
             "authors": [
                 {
                     "name": "WordPress",
-                    "homepage": "https://wordpress.org"
+                    "homepage": "https://wordpress.org/"
                 }
             ],
             "description": "Exact-revision PHP schema runtime for the Model Context Protocol (MCP)",

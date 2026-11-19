@@ -2,7 +2,7 @@
     "name": "freemius/wordpress-sdk",
     "description": "Freemius WordPress SDK",
     "keywords": ["freemius", "wordpress", "plugin", "wordpress-plugin", "theme", "wordpress-theme", "sdk"],
-    "homepage": "https://freemius.com",
+    "homepage": "https://freemius.com/",
     "license": "GPL-3.0-only",
     "scripts": {
         "phpcs": ["Composer\\Config::disableProcessTimeout", "phpcs -p -s --colors"],

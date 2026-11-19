@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'metform';
   src:
-    url('../fonts/metform.ttf?eis82y') format('truetype'),
-    url('../fonts/metform.woff?eis82y') format('woff'),
-    url('../fonts/metform.svg?eis82y#metform') format('svg');
+    url('https://www.pcpulses.com/wp-content/plugins/metform/build/assets/fonts/metform-icons/fonts/metform.ttf?eis82y') format('truetype'),
+    url('https://www.pcpulses.com/wp-content/plugins/metform/build/assets/fonts/metform-icons/fonts/metform.woff?eis82y') format('woff'),
+    url('https://www.pcpulses.com/wp-content/plugins/metform/build/assets/fonts/metform-icons/fonts/metform.svg?eis82y#metform') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
