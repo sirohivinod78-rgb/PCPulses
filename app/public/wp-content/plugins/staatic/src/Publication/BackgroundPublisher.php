@@ -1,0 +1,416 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Staatic\WordPress\Publication;
+
+use Staatic\Vendor\Psr\Log\LoggerInterface;
+use RuntimeException;
+use Staatic\WordPress\Logging\Contextable;
+use Staatic\WordPress\Publication\Task\ConditionallyRestartableTaskInterface;
+use Staatic\WordPress\Publication\Task\RestartableTaskInterface;
+use Staatic\WordPress\Publication\Task\TaskInterface;
+use Staatic\WordPress\Util\TimeLimit;
+use Throwable;
+use Staatic\Vendor\WP_Background_Process;
+
+final class BackgroundPublisher extends WP_Background_Process
+{
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @var PublicationRepository
+     */
+    private $publicationRepository;
+
+    /**
+     * @var PublicationTaskProvider
+     */
+    private $publicationTaskProvider;
+
+    /** @var int Kept for third-party back-compat only; use ProcessTimeLimit::DEFAULT_PROCESS_TIME_LIMIT. */
+    public const DEFAULT_PROCESS_TIME_LIMIT = ProcessTimeLimit::DEFAULT_PROCESS_TIME_LIMIT;
+
+    /** @var int */
+    protected $timeout;
+
+    /** @var bool */
+    protected $setTimeLimitSuccess = \false;
+
+    /** @var int */
+    protected $queue_lock_time = 60;
+
+    /** @var string */
+    protected $prefix = 'staatic';
+
+    /** @var string */
+    protected $action = 'background_publisher';
+
+    /** @var int */
+    protected $cron_interval = 1;
+
+    // Execute as quickly as possible...
+    /**
+     * @var Publication|null
+     */
+    protected $publication;
+
+    /**
+     * @var TaskInterface|null
+     */
+    protected $task;
+
+    /** The chain this request starts when it dispatches from another handler's ajax request.
+     * @var string|null */
+    private $dispatchChainId;
+
+    public function __construct(
+        LoggerInterface $logger,
+        PublicationRepository $publicationRepository,
+        PublicationTaskProvider $publicationTaskProvider
+    )
+    {
+        $this->logger = $logger;
+        $this->publicationRepository = $publicationRepository;
+        $this->publicationTaskProvider = $publicationTaskProvider;
+        if (is_multisite()) {
+            $this->prefix = sprintf('%d_%s', get_current_blog_id(), $this->prefix);
+        }
+        parent::__construct();
+    }
+
+    /**
+     * @param Publication $publication
+     */
+    public function initiatePublication($publication): bool
+    {
+        if (!$publication->status()->isPending()) {
+            $this->logger->notice(sprintf(
+                /* translators: %s: Publication ID. */
+                __('Ignoring publication #%s; publication already started', 'staatic'),
+                $publication->id()
+            ));
+
+            return \false;
+        }
+        $this->logger->notice(__('Starting publication', 'staatic'), [
+            'publicationId' => $publication->id()
+        ]);
+        $firstTask = $this->publicationTaskProvider->firstTask();
+        $publication->markInProgress();
+        $this->publicationRepository->update($publication);
+        // Only one publication is in progress at a time, so a lock or queued task left now belongs
+        // to one that ended without finishing (an uncaught error, a timeout, a forced cancel); its
+        // queued task would otherwise run first, against this publication.
+        if ($this->is_process_running()) {
+            $this->unlock_process();
+        }
+        $this->delete_all();
+        $this->push_to_queue($firstTask::name())->save()->dispatch();
+
+        return \true;
+    }
+
+    /**
+     * The library checks the current ajax request's nonce against this process's action before
+     * reading the chain id, and ends the request with a 403 on a mismatch. A publication started
+     * from another ajax handler (on save or delete) would then never get its next task scheduled,
+     * so only this process's own requests continue a chain; any other request starts one.
+     */
+    public function get_chain_id()
+    {
+        if (wp_doing_ajax() && ($_REQUEST['action'] ?? null) !== $this->identifier) {
+            if ($this->dispatchChainId === null) {
+                $this->dispatchChainId = wp_generate_uuid4();
+            }
+
+            return $this->dispatchChainId;
+        }
+
+        return parent::get_chain_id();
+    }
+
+    /**
+     * @param Publication $publication
+     */
+    public function cancelPublication($publication)
+    {
+        // Bypass a possibly stale autoloaded-options cache entry; this runs in
+        // a different process than the one progressing the publication.
+        wp_cache_delete('alloptions', 'options');
+        $currentPublicationId = get_option('staatic_current_publication_id');
+        if (!$currentPublicationId || $currentPublicationId !== $publication->id()) {
+            $this->logger->warning(__('Cannot cancel publication; publication has already finished', 'staatic'));
+
+            return \false;
+        }
+        $this->logger->notice(__('Canceling publication', 'staatic'), [
+            'publicationId' => $currentPublicationId
+        ]);
+        $this->cancel_process();
+        $publication->markCanceled();
+        $this->publicationRepository->update($publication);
+        update_option('staatic_current_publication_id', '');
+
+        return \true;
+    }
+
+    /**
+     * Handle
+     *
+     * Pass each queue item to the task handler, while remaining
+     * within server memory and time limit constraints.
+     */
+    protected function handle()
+    {
+        $this->timeout = apply_filters(
+            'staatic_publication_task_timeout',
+            (int) get_option('staatic_background_process_timeout')
+        );
+        ignore_user_abort(\true);
+        add_filter("{$this->identifier}_time_exceeded", [$this, 'timeExceeded']);
+        if (TimeLimit::setTimeLimit($this->timeout)) {
+            $this->queue_lock_time = $this->timeout;
+            $this->setTimeLimitSuccess = \true;
+            add_filter("{$this->identifier}_default_time_limit", [$this, 'processTimeLimit']);
+        }
+        parent::handle();
+    }
+
+    public function timeExceeded($return)
+    {
+        if ($return) {
+            $this->logger->debug("Background processing: time exceeded; resuming task in new process.");
+        }
+
+        return $return;
+    }
+
+    public function processTimeLimit($timeLimit)
+    {
+        if ($this->setTimeLimitSuccess) {
+            return ProcessTimeLimit::fromTimeout($this->timeout);
+        }
+
+        return $timeLimit;
+    }
+
+    /**
+     * Task
+     *
+     * Override this method to perform any actions required on each
+     * queue item. Return the modified item for further processing
+     * in the next pass through. Or, return false to remove the
+     * item from the queue.
+     *
+     * @param mixed $item Queue item to iterate over
+     *
+     * @return mixed
+     */
+    protected function task($taskName)
+    {
+        $publicationId = get_option('staatic_current_publication_id');
+        if (!$publicationId) {
+            $this->logger->critical(sprintf(
+                /* translators: %s: Publication task. */
+                __('Current publication is unknown during task %s', 'staatic'),
+                $taskName
+            ));
+
+            return \false;
+        }
+        $this->task = $this->publicationTaskProvider->getTask($taskName);
+        if ($this->logger instanceof Contextable) {
+            $this->logger->changeContext([
+                'publicationId' => $publicationId,
+                'task' => $taskName
+            ]);
+        }
+        $this->publication = $this->publicationRepository->find($publicationId);
+        if ($this->publication === null) {
+            $this->logger->critical(sprintf(
+                /* translators: %s: Publication ID, %2$s: Publication task. */
+                __('Unable to find publication #%1$s for task %2$s', 'staatic'),
+                $publicationId,
+                $taskName
+            ));
+
+            return \false;
+        }
+        if (!$this->publication->currentTask()) {
+            $this->logger->info(sprintf(
+                /* translators: %s: Publication ID, %2$s: Publication task. */
+                __('Using publication task timeout value of %d seconds', 'staatic'),
+                $this->timeout
+            ));
+        }
+        if ($this->publication->exceedsTimeLimit()) {
+            $this->handleFailure(
+                new RuntimeException(__('The publication process took too long and was canceled.', 'staatic'))
+            );
+
+            return \false;
+        }
+        $onSubsequentTask = $taskName !== $this->publication->currentTask();
+        if ($onSubsequentTask) {
+            $this->publication->setCurrentTask($taskName);
+            $this->publicationRepository->update($this->publication);
+            $this->logger->info($this->task->description());
+        } elseif (!$this->taskCanRestart($this->task, $this->publication)) {
+            // Reaching the same task twice means the previous pass never reported back, so
+            // whatever it was doing was cut short mid-flight. The cause is in the PHP error log,
+            // not here: this guard only sees the aftermath, and exists to stop a task that
+            // cannot resume from crashing over and over.
+            $this->handleFailure(new RuntimeException(sprintf(
+                /* translators: %s: Publication task. */
+                __('The %s task was started again after the previous attempt ended unexpectedly ' . '(a fatal error, out of memory, or a timeout); check the PHP error log ' . 'for the cause. If the log shows the task ran out of time, raising ' . '"Publication Task Timeout" under Staatic > Settings > Advanced may help.', 'staatic'),
+                $taskName
+            )));
+
+            return \false;
+        }
+
+        try {
+            do_action('staatic_publication_task_any', $this->publication, $this->task, \true);
+            if ($onSubsequentTask) {
+                do_action_deprecated('staatic_publication_before_task', [[
+                    'publication' => $this->publication,
+                    'task' => $this->task
+                ]], '1.4.4', 'staatic_publication_task_before');
+                do_action('staatic_publication_task_before', $this->publication, $this->task);
+            }
+        } catch (Throwable $failure) {
+            $this->handleFailure($failure);
+
+            return \false;
+        }
+
+        try {
+            // We are always on limited resources when using the background publisher.
+            $taskFinished = $this->task->execute($this->publication, \true);
+            $this->updatePublicationUnlessCanceled($this->publication);
+        } catch (Throwable $failure) {
+            $this->handleFailure($failure);
+
+            return \false;
+        }
+        // If the task has not finished, restart task.
+        if ($taskFinished === \false) {
+            return $taskName;
+        }
+
+        try {
+            do_action_deprecated('staatic_publication_after_task', [[
+                'publication' => $this->publication,
+                'task' => $this->task
+            ]], '1.4.4', 'staatic_publication_task_after');
+            do_action('staatic_publication_task_after', $this->publication, $this->task);
+        } catch (Throwable $failure) {
+            $this->handleFailure($failure);
+
+            return \false;
+        }
+        // Otherwise find the next task.
+        $nextTask = $this->publication->status()->isInProgress() ? $this->publicationTaskProvider->nextSupportedTask(
+            $this->task,
+            $this->publication
+        ) : null;
+        // Continue with next task or quit.
+        if ($nextTask) {
+            return $nextTask::name();
+        }
+        $this->logger->notice(__('Finished publication', 'staatic'), [
+            'publicationId' => $publicationId
+        ]);
+
+        return \false;
+    }
+
+    /**
+     * Whether reaching this task a second time is a resumption rather than the aftermath of an
+     * attempt that ended unexpectedly.
+     *
+     * Most tasks answer once, by their interface. A task that delegates to something chosen at
+     * runtime — initiating a deployment resumes against Staatic Cloud and cannot resume against
+     * Netlify, GitHub, AWS, SFTP or the filesystem — is asked per publication instead.
+     * @param TaskInterface $task
+     * @param Publication $publication
+     */
+    protected function taskCanRestart($task, $publication): bool
+    {
+        if (!$task instanceof ConditionallyRestartableTaskInterface) {
+            return $task instanceof RestartableTaskInterface;
+        }
+
+        // This runs before the failure handling below, and the implementation belongs to the
+        // task, which may be a third party's. An answer that throws is not an answer, and letting
+        // it escape task() would leave the publication on this task for the queue to enter again
+        // — the crash loop the guard exists to end. So it is caught and read as "cannot resume".
+        try {
+            return $task->isRestartable($publication);
+        } catch (Throwable $failure) {
+            $this->logger->warning(
+                'Unable to determine whether the current task can resume; treating it as not resumable.',
+                [
+                'task' => $task::name(),
+                'failure' => $failure
+            ]
+            );
+
+            return \false;
+        }
+    }
+
+    /**
+     * @param Throwable $failure
+     */
+    protected function handleFailure($failure): void
+    {
+        update_option('staatic_current_publication_id', '');
+        $this->publication->markFailed();
+        $this->publicationRepository->update($this->publication);
+        $this->logger->critical(sprintf(
+            /* translators: 1: Publication task. */
+            __('Publication failed during %1$s task', 'staatic'),
+            $this->task::name()
+        ), [
+            'failure' => $failure
+        ]);
+    }
+
+    /**
+     * Complete
+     *
+     * Override if applicable, but ensure that the below actions are
+     * performed, or, call parent::complete().
+     */
+    protected function complete()
+    {
+        parent::complete();
+        update_option('staatic_current_publication_id', '');
+    }
+
+    /**
+     * @param Publication $publication
+     */
+    protected function updatePublicationUnlessCanceled($publication): void
+    {
+        if ($this->isPublicationCanceled($publication)) {
+            return;
+        }
+        $this->publicationRepository->update($publication);
+    }
+
+    /**
+     * @param Publication $publication
+     */
+    protected function isPublicationCanceled($publication): bool
+    {
+        $freshPublication = $this->publicationRepository->find($publication->id());
+
+        return $freshPublication->status()->isCanceled();
+    }
+}

@@ -323,3 +323,5 @@ Stack trace:
 [22-Nov-2026 12:43:51 UTC] PHP Warning:  Array to string conversion in D:\PCPulses\app\public\wp-content\plugins\simply-static\src\integrations\class-ss-elementor-integration.php on line 153
 [22-Nov-2026 12:43:51 UTC] PHP Warning:  Array to string conversion in D:\PCPulses\app\public\wp-content\plugins\simply-static\src\integrations\class-ss-elementor-integration.php on line 153
 [22-Nov-2026 13:10:37 UTC] PHP Warning:  Trying to access array offset on value of type null in D:\PCPulses\app\public\wp-content\plugins\static-snap\src\api\class-api.php on line 28
+[22-Nov-2026 16:06:47 UTC] PHP Warning:  Trying to access array offset on value of type null in D:\PCPulses\app\public\wp-content\plugins\static-snap\src\api\class-api.php on line 28
+[22-Nov-2026 16:07:03 UTC] PHP Warning:  Trying to access array offset on value of type null in D:\PCPulses\app\public\wp-content\plugins\static-snap\src\api\class-api.php on line 28
