@@ -284,22 +284,3 @@ article,
     }
 }
 
-/* Keep the header logo from determining flow height on these pages. */
-.home .elementor-108 .elementor-element-17dac1c6 .elementor-element-2f8dfac3,
-.page-id-104 .elementor-108 .elementor-element-17dac1c6 .elementor-element-2f8dfac3,
-.page-id-190 .elementor-108 .elementor-element-17dac1c6 .elementor-element-2f8dfac3 {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    right: 0;
-    width: auto;
-    transform: translateY(-50%);
-}
-
-@media (max-width: 1024px) {
-    .home .elementor-108 .elementor-element-17dac1c6 .elementor-element-2f8dfac3,
-    .page-id-104 .elementor-108 .elementor-element-17dac1c6 .elementor-element-2f8dfac3,
-    .page-id-190 .elementor-108 .elementor-element-17dac1c6 .elementor-element-2f8dfac3 {
-        left: 20px;
-    }
-}
