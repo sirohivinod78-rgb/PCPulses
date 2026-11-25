@@ -717,3 +717,209 @@
     transition: none;
   }
 }
+
+.site-masthead {
+  min-height: 94px;
+  padding: 0 max(16px, calc((100vw - var(--page-max)) / 2 + 16px));
+  background: #1b2940;
+  border-bottom-color: rgb(255 255 255 / 0.12);
+  box-shadow: none;
+}
+
+.site-masthead__brand {
+  width: 172px;
+  max-width: min(185px, 42vw);
+}
+
+.site-masthead__brand img {
+  aspect-ratio: 431 / 100;
+  object-fit: cover;
+  object-position: center;
+}
+
+.site-masthead .site-links__icon,
+.site-masthead .site-links__cta {
+  display: none;
+}
+
+@media (min-width: 1025px) {
+  .site-masthead .site-links {
+    position: absolute;
+    left: 50%;
+    justify-content: center;
+    flex: none;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 1024px) {
+  .site-masthead {
+    min-height: 74px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.site-footer {
+  padding-right: max(8px, calc((100vw - var(--page-max)) / 2 + 8px));
+  padding-left: max(8px, calc((100vw - var(--page-max)) / 2 + 8px));
+}
+
+.site-footer .site-footer__grid {
+  grid-template-columns: 33.6% 17.2% 14.2% 35%;
+  gap: 0;
+  width: min(var(--page-max), calc(100vw - 32px));
+  max-width: var(--page-max);
+  margin-inline: auto;
+}
+
+.site-footer .site-footer__brand {
+  padding-right: 60px;
+}
+
+.site-footer .site-footer__brand > a {
+  width: 53%;
+  min-width: 0;
+  margin-bottom: 16px;
+}
+
+.site-footer .site-footer__brand img {
+  aspect-ratio: 431 / 110;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+  background: transparent;
+}
+
+.site-footer .site-footer__brand p,
+.site-footer .site-footer__column p {
+  max-width: 46ch;
+  margin: 0 0 12px;
+  color: #a1a1a1;
+  font: 300 16px/1.5 Heebo, Arial, sans-serif;
+}
+
+.site-footer .site-footer__brand p strong {
+  color: inherit;
+  font-weight: 300;
+}
+
+.site-footer .site-footer__contact li,
+.site-footer .site-footer__column li a,
+.site-footer .site-footer__column > a {
+  font: 300 16px/1.5 Heebo, Arial, sans-serif;
+}
+
+.site-footer .site-footer__column {
+  gap: 20px;
+}
+
+.site-footer .site-footer__column h2 {
+  margin: 0;
+  color: #fff;
+  font: 600 18px/1.3 Inter, Arial, sans-serif;
+}
+
+.site-footer .site-footer__column ul {
+  gap: 14px;
+}
+
+.site-footer .site-footer__newsletter {
+  padding-left: 30px;
+  gap: 14px;
+}
+
+.site-footer .site-footer__newsletter form {
+  position: relative;
+  align-items: center;
+}
+
+.site-footer .screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.site-footer .site-footer__newsletter input {
+  box-sizing: border-box;
+  min-height: 52px;
+  padding: 12px 130px 12px 18px;
+  border-radius: 6px;
+}
+
+.site-footer .site-footer__newsletter button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 115px;
+  height: 40px;
+  margin: 0;
+  border-radius: 6px;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.site-footer .site-social {
+  margin-top: 18px;
+}
+
+.site-footer .site-footer__bottom {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: var(--page-max);
+  margin: 40px auto 0;
+}
+
+.site-footer .site-footer__bottom p {
+  text-align: left;
+}
+
+.site-footer .site-footer__bottom p:last-of-type {
+  text-align: right;
+}
+
+@media (max-width: 1024px) {
+  .site-footer .site-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 28px 20px;
+  }
+
+  .site-footer .site-footer__brand > a {
+    width: min(168px, 100%);
+  }
+
+  .site-footer .site-footer__brand {
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+
+  .site-footer .site-footer__newsletter {
+    padding-left: 0;
+  }
+
+  .site-footer .site-footer__bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer .site-footer__bottom p:last-of-type {
+    text-align: left;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-footer .site-footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer .site-footer__brand {
+    grid-column: auto;
+  }
+}
