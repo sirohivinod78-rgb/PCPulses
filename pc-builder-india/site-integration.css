@@ -937,3 +937,9 @@
 .page > .site-footer {
   margin-top: 16px;
 }
+
+@media (max-height: 680px) {
+  .page > .x-bar {
+    position: static;
+  }
+}
