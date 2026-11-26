@@ -720,10 +720,9 @@
 
 .site-masthead {
   min-height: 94px;
-  padding: 0 max(16px, calc((100vw - var(--page-max)) / 2));
+  padding: 0 max(16px, calc((100vw - var(--page-max)) / 2 + 16px));
   background: #1b2940;
   border-bottom-color: rgb(255 255 255 / 0.12);
-  border-radius: 0 0 8px 8px;
   box-shadow: none;
 }
 
@@ -746,14 +745,10 @@
 @media (min-width: 1025px) {
   .site-masthead .site-links {
     position: absolute;
-    left: calc(50% - 6px);
+    left: 50%;
     justify-content: center;
     flex: none;
     transform: translateX(-50%);
-  }
-
-  .site-masthead .site-links a {
-    padding-inline: 23px;
   }
 }
 
@@ -926,20 +921,5 @@
 
   .site-footer .site-footer__brand {
     grid-column: auto;
-  }
-}
-
-.page {
-  row-gap: 0;
-}
-
-.page > .x-bar,
-.page > .site-footer {
-  margin-top: 16px;
-}
-
-@media (max-height: 680px) {
-  .page > .x-bar {
-    position: static;
   }
 }

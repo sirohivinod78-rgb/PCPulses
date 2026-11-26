@@ -101,7 +101,7 @@ body {
   color: var(--text-primary);
   font: var(--type-body);
   -webkit-font-smoothing: antialiased;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 img { max-width: 100%; display: block; }
