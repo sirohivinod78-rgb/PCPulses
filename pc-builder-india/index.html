@@ -3,12 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PC Builder India</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.pcpulses.com/pc-builder-india/hark.css">
-    <link rel="stylesheet" href="https://www.pcpulses.com/pc-builder-india/hark-hero.css">
     <script>
       (function () {
         if (new URLSearchParams(window.location.search).get("embed") !== "1") {
@@ -49,6 +43,12 @@
         }
       })();
     </script>
+    <title>PC Builder India</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+    <link rel="stylesheet" href="https://www.pcpulses.com/pc-builder-india/hark.css">
+    <link rel="stylesheet" href="https://www.pcpulses.com/pc-builder-india/hark-hero.css">
     <style>
       .x-bar { position: sticky; bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); z-index: 15; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding: 14px 18px; border-radius: var(--r-l); background: var(--mat-agent); -webkit-backdrop-filter: var(--hark-blur); backdrop-filter: var(--hark-blur); border: 1px solid var(--stroke-composer); box-shadow: var(--hark-shadow); color: var(--text-primary); }
       .x-bar__item { display: grid; gap: 2px; min-width: 0; }
@@ -115,7 +115,7 @@
       .x-alt__price small { display: inline; color: var(--text-secondary); }
       .x-alt__card .btn { align-self: flex-start; margin-top: auto; }
       .x-alt__card .x-alt__price { margin-bottom: 6px; }
-      .x-mode { margin-bottom: 0; }
+      .x-mode { margin-bottom: 12px; }
       .x-toggles { display: flex; flex-wrap: wrap; gap: 0 20px; }
       .x-scores { display: grid; gap: 4px; min-width: 150px; }
       .x-score { display: grid; grid-template-columns: 4.6em 1fr 2.6em; align-items: center; gap: 6px; font: var(--type-caption); color: var(--text-secondary); }
@@ -207,12 +207,14 @@
       @media print { .x-bar, .nav, .x-picker, .x-toast, .links, button, .x-altrow { display: none !important; } }
     </style>
     <link rel="stylesheet" href="https://www.pcpulses.com/pc-builder-india/site-integration.css">
+    <link rel="stylesheet" href="https://www.pcpulses.com/pc-builder-india/site-header-hero.css">
+    <link rel="stylesheet" href="https://www.pcpulses.com/pc-builder-india/site-standards.css">
   </head>
   <body>
     <div class="page" id="top">
       <header class="site-masthead">
         <a class="site-masthead__brand" href="https://www.pcpulses.com/" aria-label="PC Pulses home">
-          <img src="https://www.pcpulses.com/wp-content/uploads/2025/02/Logo-1.png" alt="PC Pulses &mdash; Tech Made Simple">
+          <img src="https://www.pcpulses.com/pc-builder-india/Logo-1.png" alt="PC Pulses &mdash; Tech Made Simple">
         </a>
         <input class="site-menu-toggle" id="site-menu-toggle" type="checkbox">
         <label class="site-menu-button" for="site-menu-toggle">
@@ -220,47 +222,30 @@
           <span class="site-menu-button__label">Menu</span>
         </label>
         <nav class="site-links" aria-label="Main navigation">
-          <a href="https://www.pcpulses.com/">
-            <svg class="site-links__icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-7H9v7H5a1 1 0 0 1-1-1z" fill="currentColor"></path></svg>
-            <span>Home</span>
-          </a>
-          <a href="https://www.pcpulses.com/about-us/">
-            <svg class="site-links__icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z" fill="currentColor"></path></svg>
-            <span>About Us</span>
-          </a>
-          <a href="https://www.pcpulses.com/blog/">
-            <svg class="site-links__icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M5 4h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H8l-4 3v-3H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zm2 5h8v2H7zm0 4h6v2H7z" fill="currentColor"></path></svg>
-            <span>Blog</span>
-          </a>
-          <a class="site-links__cta" href="https://www.pcpulses.com/pc-builder-india/">
-            <svg class="site-links__icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a2 2 0 0 1 2 2v1h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-1v1a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-1H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1V4a2 2 0 0 1 2-2zm9 5H8a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm-1 3h-6v2h6zm-6 4h3v2H9z" fill="currentColor"></path></svg>
-            <span>Build Your PC</span>
-          </a>
+          <a href="https://www.pcpulses.com/">Home</a>
+          <a href="https://www.pcpulses.com/about-us/">About Us</a>
+          <a href="https://www.pcpulses.com/blog/">Blog</a>
+          <a class="site-links__cta" href="https://www.pcpulses.com/pc-builder-india/index.html">Build Your PC</a>
         </nav>
       </header>
-      <header class="nav glass" data-auto></header>
       <main class="main">
         <section class="hero">
           <div class="hero__copy">
             <p class="hero__eyebrow">Build with confidence</p>
             <h1>PC Builder India</h1>
             <p class="hero__sub">Pick Eight Parts Plus Case Fans, See What They Cost, And Catch Compatibility Problems Before You Buy.</p>
+            <nav class="hero__crumbs" aria-label="Breadcrumb"><a href="https://www.pcpulses.com/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span><span aria-current="page">PC Builder India</span></nav>
           </div>
-          <img class="hero__img" src="https://www.pcpulses.com/wp-content/uploads/2025/02/pc-builder-india-banner.webp" alt="" fetchpriority="high">
+          <img class="hero__img" src="https://www.pcpulses.com/pc-builder-india/pc-builder-india-banner.webp" alt="White PC case with RGB fans" fetchpriority="high">
         </section>
+        <header class="nav glass" data-auto></header>
 
         <section class="section" id="build" data-nav="Build">
           <div class="head">
-            <h2>Your Build, Priced and Checked</h2>
+            <h2>Your build, priced and checked.</h2>
             <p class="head__sub">Start from a preset or choose each part. The picker lists every part and flags what doesn't fit.</p>
           </div>
-          <div class="x-mode-panel">
-            <div class="x-mode-panel__copy">
-              <h3 id="ranking-mode-title">Ranking mode</h3>
-              <p>Choose the performance scores that matter most for your build.</p>
-            </div>
-            <div class="x-fgroup x-mode" role="group" aria-labelledby="ranking-mode-title" id="mode-top"></div>
-          </div>
+          <div class="x-fgroup x-mode" role="group" aria-label="Ranking mode" id="mode-top"></div>
           <div class="links" id="presets">
             <button class="btn" data-preset="budget">Budget preset</button>
             <button class="btn" data-preset="balanced">Balanced preset</button>
@@ -301,13 +286,7 @@
             <p class="head__sub">Socket, memory type and slots, cooler mount, case fit, GPU length, cooler height or radiator, M.2 slots, case fan size and power.</p>
           </div>
           <ul class="checklist" id="check-list"></ul>
-          <aside class="power-note" aria-labelledby="power-note-title">
-            <div class="power-note__recommendation">
-              <h3 id="power-note-title">Choosing the right PSU</h3>
-              <p>Choose a PSU with 30% headroom or the GPU maker's recommendation, whichever is higher.</p>
-            </div>
-            <p class="power-note__detail">Our estimate adds CPU peak draw (turbo power, or TDP &times; 1.35), GPU board power, 3 W per case fan and 75 W for the rest of the system.</p>
-          </aside>
+          <p class="fineprint">Power estimate: CPU peak draw (turbo power, or TDP &times; 1.35) plus GPU board power plus 3 W per case fan plus 75 W for the rest. Recommended PSU is 30% headroom or the GPU maker's figure, whichever is higher.</p>
         </section>
 
       </main>
@@ -319,67 +298,69 @@
         <div class="x-bar__actions"><button class="btn" data-share="1">Share</button><button class="btn" id="pdf">Download PDF</button></div>
       </div>
 
-      <footer class="site-footer foot">
-        <div class="site-footer__grid">
-          <div class="site-footer__brand">
-            <a href="https://www.pcpulses.com/" aria-label="PC Pulses home">
-              <img src="https://www.pcpulses.com/wp-content/uploads/2025/02/Logo-1.png" alt="PC Pulses &mdash; Tech Made Simple">
-            </a>
-            <p><strong>At PC Pulses, We Make Technology Simple. From In-depth Reviews To Step-by-step Guides, Stay Ahead With The Pulse Of Innovation.</strong></p>
-            <ul class="site-footer__contact">
-              <li><span aria-hidden="true">&#8982;</span> C-201 Nava Kairali, Plot No -10 Dwarka Delhi</li>
-              <li><span aria-hidden="true">&#9993;</span> <a href="mailto:support@pcpulses.com">support@pcpulses.com</a></li>
-              <li><span aria-hidden="true">&#9742;</span> <a href="tel:+911179687162">(+91)01179687162</a></li>
+      <footer class="site-footer foot pf">
+        <div class="pf-grid">
+          <div class="pf-brand">
+            <a class="pf-logo" href="https://www.pcpulses.com/" aria-label="PC Pulses home"><img src="https://www.pcpulses.com/pc-builder-india/Logo-1.png" alt="PC Pulses &mdash; Tech Made Simple"></a>
+            <p class="pf-about">At PC Pulses, We Make Technology Simple. From In-depth Reviews To Step-by-step Guides, Stay Ahead With The Pulse Of Innovation.</p>
+            <ul class="pf-contact">
+              <li><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"></path></svg><span>C-201 Nava Kairali, Plot No -10 Dwarka Delhi</span></li>
+              <li><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.6 7H19.4z"></path></svg><a href="mailto:support@pcpulses.com">support@pcpulses.com</a></li>
+              <li><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"></path></svg><a href="tel:+911179687162">(+91)01179687162</a></li>
             </ul>
           </div>
-          <div class="site-footer__column">
+          <div class="pf-col">
             <h2>Other Pages</h2>
             <ul>
-              <li><a href="https://www.pcpulses.com/">Home</a></li>
-              <li><a href="https://www.pcpulses.com/about-us/">About Us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Project</a></li>
+              <li><a href="https://www.pcpulses.com/"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>Home</a></li>
+              <li><a href="https://www.pcpulses.com/about-us/"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>About Us</a></li>
+              <li><a href="#"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>Services</a></li>
+              <li><a href="#"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>Contact</a></li>
+              <li><a href="#"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>Project</a></li>
             </ul>
           </div>
-          <div class="site-footer__column">
+          <div class="pf-col">
             <h2>Quick Links</h2>
             <ul>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Term Of Service</a></li>
-              <li><a href="#">Disclaimer</a></li>
-              <li><a href="#">Credits</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><a href="#"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>Privacy Policy</a></li>
+              <li><a href="#"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>Term Of Service</a></li>
+              <li><a href="#"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>Disclaimer</a></li>
+              <li><a href="#"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>Credits</a></li>
+              <li><a href="#"><span class="pf-chev" aria-hidden="true">&rsaquo;</span>FAQ</a></li>
             </ul>
           </div>
-          <div class="site-footer__column site-footer__newsletter">
+          <div class="pf-news">
             <h2>Newsletter</h2>
-            <form action="mailto:support@pcpulses.com" method="post" enctype="text/plain">
-              <label class="screen-reader-text" for="footer-email">Your email address</label>
-              <input id="footer-email" type="email" name="email" placeholder="Your Email Address" required>
-              <button type="submit">Subscribe</button>
+            <form class="pf-form" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.nextElementSibling.textContent='Thanks! You\'re subscribed.';">
+              <label for="pf-email">Email Address <span>*</span></label>
+              <div class="pf-field">
+                <span class="pf-mail" aria-hidden="true"><svg viewbox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.6 7H19.4z"></path></svg></span>
+                <input id="pf-email" type="email" placeholder="Email Address" required>
+                <button type="submit">Subscribe</button>
+              </div>
             </form>
-            <p>Get the latest news &amp; updates</p>
+            <p class="pf-note">Get the latest news &amp; updates</p>
             <div class="site-social" aria-label="Social networks">
-              <span class="site-social__icon" role="img" aria-label="Facebook">
+              <a class="site-social__icon" href="#" aria-label="Facebook">
                 <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8z"></path></svg>
-              </span>
-              <span class="site-social__icon" role="img" aria-label="Twitter">
+              </a>
+              <a class="site-social__icon" href="#" aria-label="Twitter">
                 <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M18.9 3H22l-6.8 7.8L23.2 21h-6.3L12 14.8 6.1 21H3l7.3-8.4L2.8 3h6.5l4.5 6zM17.8 19h1.7L8.3 4.9H6.5z"></path></svg>
-              </span>
-              <span class="site-social__icon" role="img" aria-label="Instagram">
+              </a>
+              <a class="site-social__icon" href="#" aria-label="Instagram">
                 <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2m0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4zm9.8 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6"></path></svg>
-              </span>
-              <span class="site-social__icon" role="img" aria-label="LinkedIn">
+              </a>
+              <a class="site-social__icon" href="#" aria-label="LinkedIn">
                 <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M5.2 3a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4M3.3 9h3.8v12H3.3zm6.2 0h3.6v1.6h.1A4 4 0 0 1 16.8 8c3.9 0 4.6 2.5 4.6 5.8V21h-3.8v-6.4c0-1.5 0-3.4-2.1-3.4s-2.4 1.6-2.4 3.3V21H9.5z"></path></svg>
-              </span>
+              </a>
             </div>
           </div>
         </div>
-        <div class="site-footer__bottom">
-          <p>Technology &amp; IT Solution Template Kit by Baliniz</p>
+        <div class="pf-bottom">
+          <p>Technolgy &amp; IT Solution Template Kit by Baliniz</p>
           <p>Copyright &copy; 2021 All rights reserved.</p>
         </div>
+        <nav aria-label="Back to builder sections" data-auto hidden></nav>
       </footer>
     </div>
 
@@ -793,22 +774,20 @@
 
         var LV = ["Pass", "Warning", "Problem"], LC = ["x-ok", "x-warn", "x-fail"];
 
-        function modeButtons() {
-          return ["gaming", "creator"].map(function (m) { return '<button type="button" class="x-fchip" data-mode="' + m + '" aria-pressed="' + (MODE === m) + '">' + MN[m] + "</button>"; }).join("");
-        }
         function modeChips() {
-          return "<span>Ranking mode</span>" + modeButtons();
+          return "<span>Ranking mode</span>" + ["gaming", "creator"].map(function (m) { return '<button type="button" class="x-fchip" data-mode="' + m + '" aria-pressed="' + (MODE === m) + '">' + MN[m] + "</button>"; }).join("");
         }
         function render() {
+          syncPresets();
           var rs = checks(B), T = totals();
-          $("mode-top").innerHTML = modeButtons();
+          $("mode-top").innerHTML = modeChips();
           $("build-rows").innerHTML = C.map(function (cat) {
             var p = B[cat];
             var iss = p ? rs.filter(function (x) { return x.l && x.cats.indexOf(cat) > -1; }) : [];
             var unv = p ? rs.filter(function (x) { return x.nv && x.cats.indexOf(cat) > -1; }) : [];
             var cells = !p ? '<td class="muted is-empty"></td>' : '<td class="' + (p.price != null ? "num" : "muted") + '" data-label="Price">' + priceHtml(p) + findLink(p) + "</td>";
             var al = p ? alts(cat) : { up: [], down: [] }, nAlt = al.up.length + al.down.length;
-            var open = altOpen[cat] != null ? altOpen[cat] : false;
+            var open = altOpen[cat] === true;
             var altRow = nAlt ? '<tr class="x-altrow"><td colspan="4"><details class="x-alt" data-cat="' + cat + '"' + (open ? " open" : "") + "><summary>See better / cheaper options</summary>" +
               '<div class="x-alt__grid">' + al.up.map(function (a) { return altCard("Better option", a, p); }).join("") + al.down.map(function (a) { return altCard("Cheaper option", a, p); }).join("") + "</div></details></td></tr>" : "";
             return "<tr" + (nAlt ? ' class="x-hasalt"' : "") + '><th scope="row" class="rowhead">' + CN[cat] + (cat === "cooler" || cat === "gpu" ? "<small>Optional</small>" : "") + "</th>" +
@@ -846,6 +825,19 @@
           return b;
         }
         function setNames(names, fl) { B = namesTo(names, fl); render(); }
+        // Highlight the preset whose parts match the current build.
+        function buildKey(b) {
+          var k = C.map(function (cat) { return b[cat] ? b[cat].name : ""; });
+          (b.fans || []).forEach(function (e) { k.push(e.p.name + "x" + e.q); });
+          return k.join("|");
+        }
+        function syncPresets() {
+          var now = buildKey(B);
+          [].forEach.call(document.querySelectorAll("#presets [data-preset]"), function (btn) {
+            var names = PRE[btn.dataset.preset];
+            btn.setAttribute("aria-pressed", String(!!names && buildKey(namesTo(names)) === now));
+          });
+        }
         // Preset totals, quantity included, shown on each preset button.
         [].forEach.call(document.querySelectorAll("[data-preset]"), function (btn) {
           var names = PRE[btn.dataset.preset];
@@ -1298,19 +1290,6 @@
           else if (t.id === "sh-close") closeShare();
         });
         try { window.addEventListener("hashchange", function () { var c = readCode(); if (c) loadCode(c); }); } catch (e) {}
-
-        (function () {
-          var nav = document.querySelector(".site-links");
-          if (!nav) return;
-          var currentPath = (window.location.pathname || "/").replace(/\/+$/, "") || "/";
-          nav.querySelectorAll("a[href]").forEach(function (link) {
-            var targetPath = (new URL(link.href, window.location.href).pathname || "/").replace(/\/+$/, "") || "/";
-            var isCurrent = targetPath === currentPath;
-            link.classList.toggle("is-current", isCurrent);
-            if (isCurrent) link.setAttribute("aria-current", "page");
-            else link.removeAttribute("aria-current");
-          });
-        })();
 
         var saved = null, shared = readCode();
         var savedFans = null;
